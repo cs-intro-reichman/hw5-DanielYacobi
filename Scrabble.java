@@ -49,7 +49,7 @@ public class Scrabble {
 	// Checks if the given word is in the dictionary.
 	public static boolean isWordInDictionary(String word) {
 		for (int i = 0; i < NUM_OF_WORDS; i++) { //goes over the entire dictionay
-			if (DICTIONARY[i].equals(word.toLowerCase()))
+			if (DICTIONARY[i].equals(word))
 				return true;
 		}
 		return false;
@@ -82,10 +82,8 @@ public class Scrabble {
 	// If the word includes the sequence "runi", adds 1000 points to the game.
 	public static int wordScore(String word) {
 		int points = 0;
-		if (isWordInDictionary(word)) {
-			for (int i = 0; i < word.length(); i++) {
-				points = points + SCRABBLE_LETTER_VALUES[(int)(word.charAt(i)) - 97];
-			}
+		for (int i = 0; i < word.length(); i++) {
+			points = points + SCRABBLE_LETTER_VALUES[(int)(word.charAt(i)) - 97];
 		}
 		points = points * word.length();
 		if (word.length() == HAND_SIZE)
@@ -155,28 +153,6 @@ public class Scrabble {
 	public static void main(String[] args) {
 		testBuildingTheDictionary(); 
 		testScrabbleScore();    
-		////testCreateHands();  
-		////testPlayHands();
-		////playGame(); 
-		/* 
-		String word = "running";
-		int points = 0;
-		System.out.println("word: " + word);
-		System.out.println(isWordInDictionary(word));
-		if (isWordInDictionary(word)) {
-			for (int i = 0; i < word.length(); i++) {
-				System.out.println("letter idx:" + ((int)(word.charAt(i)) - 97));
-				points = points + SCRABBLE_LETTER_VALUES[(int)(word.charAt(i)) - 97];
-				System.out.println("points for letter: " + SCRABBLE_LETTER_VALUES[(int)(word.charAt(i)) - 97]);
-				System.out.println("current points: " + points);
-			}
-		}
-		if (word.length() == HAND_SIZE)
-			points = points + 50;
-		if (runiFound(word))
-			points = points + 1000;
-		//HAND_SIZE = HAND_SIZE - word.length();
-		System.out.println(points); */
 	}
 
 	public static void testBuildingTheDictionary() {
@@ -189,8 +165,13 @@ public class Scrabble {
 	}
 	
 	public static void testScrabbleScore() {
-		System.out.println(wordScore("bee"));	
+		/*System.out.println(wordScore("bee"));	
 		System.out.println(wordScore("babe"));
+		System.out.println(wordScore("friendship"));
+		System.out.println(wordScore("running"));*/
+		System.out.println(wordScore("cat"));
+		System.out.println(wordScore("dog"));
+		System.out.println(wordScore("quiz"));
 		System.out.println(wordScore("friendship"));
 		System.out.println(wordScore("running"));
 	}
