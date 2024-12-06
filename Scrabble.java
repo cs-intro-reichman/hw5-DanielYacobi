@@ -128,10 +128,11 @@ public class Scrabble {
 				hand = MyString.remove(hand, input); //removes used letters
 			}
 			else {
-				if (!MyString.subsetOf(input, hand)) //used letters that aren't in hand
-					System.out.println("Invalid word. Try again.");
-				if (!isWordInDictionary(input) && MyString.subsetOf(input, hand)) //not in dictionary
-					System.out.println("No such word in the dictionary. Try again.");
+				if (!MyString.subsetOf(input, hand)) { //used letters that aren't in hand
+					System.out.println("Invalid word. Try again."); 
+				} else if (!isWordInDictionary(input)) { //word not found in dictionary
+					System.out.println("No such word in the dictionary. Try again."); 
+				}
 			}
 		}
 		if (hand.length() == 0) 
