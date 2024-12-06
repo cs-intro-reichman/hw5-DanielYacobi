@@ -49,7 +49,7 @@ public class Scrabble {
 	// Checks if the given word is in the dictionary.
 	public static boolean isWordInDictionary(String word) {
 		for (int i = 0; i < NUM_OF_WORDS; i++) { //goes over the entire dictionay
-			if (DICTIONARY[i].equals(word))
+			if (DICTIONARY[i].equals(word)) //searches if the word is in the dictionary
 				return true;
 		}
 		return false;
@@ -83,14 +83,13 @@ public class Scrabble {
 	public static int wordScore(String word) {
 		int points = 0;
 		for (int i = 0; i < word.length(); i++) {
-			points = points + SCRABBLE_LETTER_VALUES[(int)(word.charAt(i)) - 97];
+			points = points + SCRABBLE_LETTER_VALUES[(int)(word.charAt(i)) - 97]; //adds points per letter
 		}
-		points = points * word.length();
-		if (word.length() == HAND_SIZE)
+		points = points * word.length(); //multiplies the score by the word length
+		if (word.length() == HAND_SIZE) //special case
 			points = points + 50;
-		if (runiFound(word))
+		if (runiFound(word)) //special case
 			points = points + 1000;
-		//HAND_SIZE = HAND_SIZE - word.length();
 		return points;
 	}
 
@@ -98,8 +97,11 @@ public class Scrabble {
 	// into it, at random indexes, the letters 'a' and 'e'
 	// (these two vowels make it easier for the user to construct words)
 	public static String createHand() {
-		//// Replace the following statement with your code
-		return null;
+		String hand = MyString.randomStringOfLetters(HAND_SIZE - 2);
+		hand = MyString.insertRandomly('a', hand); //inserts 'a' randomly
+		hand = MyString.insertRandomly('e', hand); //inserts 'e' randomly
+		hand = MyString.spacedString(hand); //spaces the letters
+		return hand;
 	}
 	
     // Runs a single hand in a Scrabble game. Each time the user enters a valid word:
@@ -146,13 +148,20 @@ public class Scrabble {
 			String input = in.readString();
 			//// Replace the following break statement with code
 			//// that completes the game playing loop
-			break;
+			if (input == "n") {
+				
+			}
+			if (input == "e") 
+				break;
 		}
 	}
 
 	public static void main(String[] args) {
 		testBuildingTheDictionary(); 
-		testScrabbleScore();    
+		testScrabbleScore();
+		testCreateHands();  
+		////testPlayHands();
+		////playGame();
 	}
 
 	public static void testBuildingTheDictionary() {
@@ -165,13 +174,8 @@ public class Scrabble {
 	}
 	
 	public static void testScrabbleScore() {
-		/*System.out.println(wordScore("bee"));	
+		System.out.println(wordScore("bee"));	
 		System.out.println(wordScore("babe"));
-		System.out.println(wordScore("friendship"));
-		System.out.println(wordScore("running"));*/
-		System.out.println(wordScore("cat"));
-		System.out.println(wordScore("dog"));
-		System.out.println(wordScore("quiz"));
 		System.out.println(wordScore("friendship"));
 		System.out.println(wordScore("running"));
 	}
