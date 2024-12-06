@@ -100,7 +100,7 @@ public class MyString {
     /**
      * Returns a string consisting of the string str1, minus all the characters in the
      * string str2. Assumes (without checking) that str2 is a subset of str1.
-     * Example: remove("meet","committee") returns "comit" 
+     * Example: remove("committee","meet") returns "comit" 
      * 
      * @param str1 - a string
      * @param str2 - a string

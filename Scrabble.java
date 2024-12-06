@@ -98,9 +98,9 @@ public class Scrabble {
 	// (these two vowels make it easier for the user to construct words)
 	public static String createHand() {
 		String hand = MyString.randomStringOfLetters(HAND_SIZE - 2);
+		hand = hand.toLowerCase();
 		hand = MyString.insertRandomly('a', hand); //inserts 'a' randomly
 		hand = MyString.insertRandomly('e', hand); //inserts 'e' randomly
-		hand = MyString.spacedString(hand); //spaces the letters
 		return hand;
 	}
 	
@@ -109,7 +109,7 @@ public class Scrabble {
     // 2. The user gets the Scrabble points of the entered word.
     // 3. The user is prompted to enter another word, or '.' to end the hand. 
 	public static void playHand(String hand) {
-		int n = hand.length();
+		//int n = hand.length();
 		int score = 0;
 		// Declares the variable in to refer to an object of type In, and initializes it to represent
 		// the stream of characters coming from the keyboard. Used for reading the user's inputs.   
@@ -123,13 +123,26 @@ public class Scrabble {
 			String input = in.readString();
 			//// Replace the following break statement with code
 			//// that completes the hand playing loop
-			break;
+			if (input.equals("."))
+				break;
+			if (isWordInDictionary(input)) {
+				if (MyString.subsetOf(input, hand)) {
+					score = score + wordScore(input);
+					System.out.println(input + " earned " + wordScore(input) + " points. Score: " + score + " points");
+					hand = MyString.remove(hand, input);
+					HAND_SIZE = hand.length();
+				}
+				else
+					System.out.println("Invalid word. Try again.");
+			}
+			else 
+				System.out.println("No such word in the dictionary. Try again.");
 		}
-		if (hand.length() == 0) {
+		if (hand.length() == 0) 
 	        System.out.println("Ran out of letters. Total score: " + score + " points");
-		} else {
+		else 
 			System.out.println("End of hand. Total score: " + score + " points");
-		}
+		HAND_SIZE = 10;
 	}
 
 	// Plays a Scrabble game. Prompts the user to enter 'n' for playing a new hand, or 'e'
@@ -148,19 +161,15 @@ public class Scrabble {
 			String input = in.readString();
 			//// Replace the following break statement with code
 			//// that completes the game playing loop
-			if (input == "n") {
-				
-			}
-			if (input == "e") 
 				break;
 		}
 	}
 
 	public static void main(String[] args) {
-		testBuildingTheDictionary(); 
-		testScrabbleScore();
-		testCreateHands();  
-		////testPlayHands();
+		//testBuildingTheDictionary(); 
+		//testScrabbleScore();
+		//testCreateHands();  
+		//testPlayHands();
 		////playGame();
 	}
 
@@ -185,10 +194,11 @@ public class Scrabble {
 		System.out.println(createHand());
 		System.out.println(createHand());
 	}
+
 	public static void testPlayHands() {
 		init();
-		//playHand("ocostrza");
-		//playHand("arbffip");
-		//playHand("aretiin");
+		playHand("ocostrza");
+		playHand("arbffip");
+		playHand("aretiin");
 	}
 }
