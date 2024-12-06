@@ -124,7 +124,8 @@ public class Scrabble {
 				break;
 			if (isWordInDictionary(input) && MyString.subsetOf(input, hand)) { //valid word
 				score = score + wordScore(input);
-				System.out.println(input + " earned " + wordScore(input) + " points. Score: " + score + " points");
+				//System.out.println(input + " earned " + wordScore(input) + " points. Score: " + score + " points");
+				System.out.println("'" + input + "' -> score: " + wordScore(input));
 				hand = MyString.remove(hand, input); //removes used letters
 			}
 			else {
