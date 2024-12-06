@@ -48,7 +48,32 @@ public class Scrabble {
 
 	// Checks if the given word is in the dictionary.
 	public static boolean isWordInDictionary(String word) {
-		//// Replace the following statement with your code
+		for (int i = 0; i < NUM_OF_WORDS; i++) { //goes over the entire dictionay
+			if (DICTIONARY[i].equals(word.toLowerCase()))
+				return true;
+		}
+		return false;
+	}
+	
+	//receives a String and returns true if the sequence "runi" is inside 
+	public static boolean runiFound (String word) {
+		String temp = word.toLowerCase();
+		int count = 0;
+		for (int i = 0; i < temp.length(); i++) {
+			if (temp.charAt(i) != 'r' && temp.charAt(i) != 'u'
+			&& temp.charAt(i) != 'n' && temp.charAt(i) != 'i') //sequence interrupted
+				count = 0;
+			if (temp.charAt(i) == 'r' && count == 0) 
+				count++;
+			if (temp.charAt(i) == 'u' && count == 1) 
+				count++;
+			if (temp.charAt(i) == 'n' && count == 2) 
+				count++;
+			if (temp.charAt(i) == 'i' && count == 3) 
+				count++;
+			if (count == 4) //found the sequence runi
+				return true;
+		}
 		return false;
 	}
 	
@@ -56,8 +81,16 @@ public class Scrabble {
 	// If the length of the word equals the length of the hand, adds 50 points to the score.
 	// If the word includes the sequence "runi", adds 1000 points to the game.
 	public static int wordScore(String word) {
-		//// Replace the following statement with your code
-		return 0;
+		int points = 0;
+		for (int i = 0; i < word.length(); i++) {
+			if ((int)(word.charAt(i)) - 97 == i)
+				points = points + SCRABBLE_LETTER_VALUES[i];
+		}
+		if (word.length() == HAND_SIZE)
+			points = points + 50;
+		if (runiFound(word))
+			points = points + 1000;
+		return points;
 	}
 
 	// Creates a random hand of length (HAND_SIZE - 2) and then inserts
@@ -117,8 +150,7 @@ public class Scrabble {
 	}
 
 	public static void main(String[] args) {
-		//// Uncomment the test you want to run
-		////testBuildingTheDictionary();  
+		testBuildingTheDictionary(); 
 		////testScrabbleScore();    
 		////testCreateHands();  
 		////testPlayHands();
