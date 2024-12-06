@@ -82,14 +82,17 @@ public class Scrabble {
 	// If the word includes the sequence "runi", adds 1000 points to the game.
 	public static int wordScore(String word) {
 		int points = 0;
-		for (int i = 0; i < word.length(); i++) {
-			if ((int)(word.charAt(i)) - 97 == i)
-				points = points + SCRABBLE_LETTER_VALUES[i];
+		if (isWordInDictionary(word)) {
+			for (int i = 0; i < word.length(); i++) {
+				points = points + SCRABBLE_LETTER_VALUES[(int)(word.charAt(i)) - 97];
+			}
 		}
+		points = points * word.length();
 		if (word.length() == HAND_SIZE)
 			points = points + 50;
 		if (runiFound(word))
 			points = points + 1000;
+		//HAND_SIZE = HAND_SIZE - word.length();
 		return points;
 	}
 
@@ -151,10 +154,29 @@ public class Scrabble {
 
 	public static void main(String[] args) {
 		testBuildingTheDictionary(); 
-		////testScrabbleScore();    
+		testScrabbleScore();    
 		////testCreateHands();  
 		////testPlayHands();
-		////playGame();
+		////playGame(); 
+		/* 
+		String word = "running";
+		int points = 0;
+		System.out.println("word: " + word);
+		System.out.println(isWordInDictionary(word));
+		if (isWordInDictionary(word)) {
+			for (int i = 0; i < word.length(); i++) {
+				System.out.println("letter idx:" + ((int)(word.charAt(i)) - 97));
+				points = points + SCRABBLE_LETTER_VALUES[(int)(word.charAt(i)) - 97];
+				System.out.println("points for letter: " + SCRABBLE_LETTER_VALUES[(int)(word.charAt(i)) - 97]);
+				System.out.println("current points: " + points);
+			}
+		}
+		if (word.length() == HAND_SIZE)
+			points = points + 50;
+		if (runiFound(word))
+			points = points + 1000;
+		//HAND_SIZE = HAND_SIZE - word.length();
+		System.out.println(points); */
 	}
 
 	public static void testBuildingTheDictionary() {
