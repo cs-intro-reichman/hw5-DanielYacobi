@@ -27,8 +27,7 @@ public class MyString {
         return counter;
     }
 
-    //Returns a String without similar to str but with the first showing of
-    //ch removed from it
+    //Returns str minus the first showing of ch
     public static String removeFirstShowing(String str, char ch) {
         String fixed = "";
         boolean isRemoved = false;

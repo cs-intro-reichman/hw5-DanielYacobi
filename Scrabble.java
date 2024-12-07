@@ -55,7 +55,7 @@ public class Scrabble {
 		return false;
 	}
 	
-	//Returns true if the sequence "runi" is inside the string
+	//Returns true if the sequence "runi" is inside the String
 	//and false otherwise
 	public static boolean runiFound (String word) {
 		String temp = word.toLowerCase();
